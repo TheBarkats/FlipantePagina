@@ -32,8 +32,9 @@ jobs:
           PORT: ${{ secrets.PORT }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > private_key
+          printf '%s' "$SSH_PRIVATE_KEY" | sed 's/\\n/\n/g' | tr -d '\r' > private_key
           chmod 600 private_key
+          ssh-keygen -y -f private_key > /dev/null
 
           rsync -avz --delete --dry-run \
           -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
