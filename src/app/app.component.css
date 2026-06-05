@@ -1,0 +1,494 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    #72d6ff 0%,
+    #9ee8ff 30%,
+    #dff9ff 60%,
+    #f7fefc 100%
+  );
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* SOL */
+
+.sun {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  top: 70px;
+  right: 10%;
+  background: radial-gradient(circle, #fff59d, #ffca28);
+  box-shadow:
+    0 0 60px #ffd54f,
+    0 0 120px #ffeb3b,
+    0 0 200px rgba(255, 235, 59, 0.5);
+}
+
+/* NUBES */
+
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.9);
+  border-radius: 100px;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud1 {
+  width: 160px;
+  height: 55px;
+  top: 100px;
+  left: -200px;
+  animation: moveClouds 45s linear infinite;
+}
+
+.cloud1::before {
+  width: 80px;
+  height: 80px;
+  top: -30px;
+  left: 20px;
+}
+
+.cloud1::after {
+  width: 90px;
+  height: 90px;
+  top: -35px;
+  right: 15px;
+}
+
+.cloud2 {
+  width: 210px;
+  height: 70px;
+  top: 180px;
+  left: -300px;
+  animation: moveClouds 70s linear infinite;
+}
+
+.cloud2::before {
+  width: 90px;
+  height: 90px;
+  top: -35px;
+  left: 30px;
+}
+
+.cloud2::after {
+  width: 110px;
+  height: 110px;
+  top: -45px;
+  right: 25px;
+}
+
+.cloud3 {
+  width: 140px;
+  height: 50px;
+  top: 70px;
+  left: -250px;
+  animation: moveClouds 55s linear infinite;
+}
+
+.cloud3::before {
+  width: 70px;
+  height: 70px;
+  top: -25px;
+  left: 20px;
+}
+
+.cloud3::after {
+  width: 75px;
+  height: 75px;
+  top: -30px;
+  right: 15px;
+}
+
+@keyframes moveClouds {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(160vw);
+  }
+}
+
+/* MONTAÑAS */
+
+.mountain {
+  position: absolute;
+  bottom: 25%;
+}
+
+.mountain-back {
+  width: 100%;
+  height: 280px;
+  background: #7da48c;
+  clip-path: polygon(
+    0% 100%,
+    15% 45%,
+    35% 70%,
+    50% 35%,
+    70% 75%,
+    85% 40%,
+    100% 100%
+  );
+}
+
+.mountain-middle {
+  width: 100%;
+  height: 350px;
+  background: #5c8d73;
+  clip-path: polygon(
+    0% 100%,
+    10% 55%,
+    25% 20%,
+    40% 70%,
+    55% 30%,
+    75% 65%,
+    90% 25%,
+    100% 100%
+  );
+}
+
+.mountain-front {
+  width: 100%;
+  height: 250px;
+  background: #40634e;
+  clip-path: polygon(
+    0% 100%,
+    20% 60%,
+    35% 85%,
+    55% 40%,
+    75% 80%,
+    90% 50%,
+    100% 100%
+  );
+}
+
+/* CONTENIDO */
+
+.content {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  z-index: 20;
+  max-width: 600px;
+}
+
+.content h1 {
+  font-size: 5rem;
+  color: white;
+  text-shadow:
+    0 4px 15px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 30px;
+  line-height: 1.7;
+  max-width: 500px;
+}
+
+.content button {
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  background: white;
+  color: #2f5e45;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.content button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* PRADERA */
+
+.grass {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  background:
+    linear-gradient(
+      to bottom,
+      #52c95f,
+      #2d8b3e
+    );
+}
+
+/* ARBUSTOS */
+
+.bushes {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 140px;
+  z-index: 12;
+}
+
+.bush {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #4caf50,
+    #1b5e20
+  );
+  animation: bushMove 6s ease-in-out infinite;
+}
+
+.bush::before,
+.bush::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+/* Arbusto 1 */
+.bush1 {
+  width: 120px;
+  height: 80px;
+  left: 5%;
+}
+
+.bush1::before {
+  width: 70px;
+  height: 70px;
+  left: -20px;
+  top: 15px;
+}
+
+.bush1::after {
+  width: 80px;
+  height: 80px;
+  right: -25px;
+  top: 10px;
+}
+
+/* Arbusto 2 */
+.bush2 {
+  width: 150px;
+  height: 95px;
+  left: 18%;
+}
+
+.bush2::before {
+  width: 90px;
+  height: 90px;
+  left: -30px;
+  top: 15px;
+}
+
+.bush2::after {
+  width: 90px;
+  height: 90px;
+  right: -25px;
+  top: 15px;
+}
+
+/* Arbusto 3 */
+.bush3 {
+  width: 110px;
+  height: 70px;
+  left: 33%;
+}
+
+.bush3::before,
+.bush3::after {
+  width: 70px;
+  height: 70px;
+  top: 10px;
+}
+
+.bush3::before {
+  left: -20px;
+}
+
+.bush3::after {
+  right: -20px;
+}
+
+/* Arbusto 4 */
+.bush4 {
+  width: 180px;
+  height: 100px;
+  left: 46%;
+}
+
+.bush4::before {
+  width: 100px;
+  height: 100px;
+  left: -35px;
+}
+
+.bush4::after {
+  width: 100px;
+  height: 100px;
+  right: -35px;
+}
+
+/* Arbusto 5 */
+.bush5 {
+  width: 130px;
+  height: 85px;
+  left: 62%;
+}
+
+.bush5::before,
+.bush5::after {
+  width: 80px;
+  height: 80px;
+}
+
+.bush5::before {
+  left: -25px;
+}
+
+.bush5::after {
+  right: -25px;
+}
+
+/* Arbusto 6 */
+.bush6 {
+  width: 100px;
+  height: 65px;
+  left: 74%;
+}
+
+.bush6::before,
+.bush6::after {
+  width: 60px;
+  height: 60px;
+}
+
+.bush6::before {
+  left: -15px;
+}
+
+.bush6::after {
+  right: -15px;
+}
+
+/* Arbusto 7 */
+.bush7 {
+  width: 160px;
+  height: 95px;
+  left: 82%;
+}
+
+.bush7::before {
+  width: 90px;
+  height: 90px;
+  left: -25px;
+}
+
+.bush7::after {
+  width: 90px;
+  height: 90px;
+  right: -25px;
+}
+
+/* Arbusto 8 */
+.bush8 {
+  width: 110px;
+  height: 70px;
+  left: 92%;
+}
+
+.bush8::before,
+.bush8::after {
+  width: 70px;
+  height: 70px;
+}
+
+.bush8::before {
+  left: -20px;
+}
+
+.bush8::after {
+  right: -20px;
+}
+
+@keyframes bushMove {
+  0%,100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes sway {
+  0%,100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* PÁJAROS */
+
+.birds span {
+  position: absolute;
+  width: 25px;
+  height: 12px;
+  border-top: 3px solid #333;
+  border-radius: 50%;
+}
+
+.birds span:nth-child(1) {
+  top: 130px;
+  left: 60%;
+}
+
+.birds span:nth-child(2) {
+  top: 150px;
+  left: 65%;
+}
+
+.birds span:nth-child(3) {
+  top: 120px;
+  left: 70%;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .content {
+    left: 30px;
+    right: 30px;
+  }
+
+  .content h1 {
+    font-size: 3rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+}
