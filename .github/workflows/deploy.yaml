@@ -45,5 +45,5 @@ jobs:
           fi
 
           rsync -avz --delete --dry-run \
-          -e "ssh -i $private_key -o StrictHostKeyChecking=no -p $PORT" \
+          -e "ssh -i \"$private_key\" -o StrictHostKeyChecking=no -p $PORT" \
           dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
