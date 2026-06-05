@@ -1,4 +1,4 @@
-name: Deploy to SiteGround - FlipantePagina
+name: Deploy Angular to SiteGround
 
 on:
   push:
@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,18 +21,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Angular
+      - name: Build Angular project
         run: npm run build
 
       - name: Deploy to SiteGround
+        
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
-
+          ls -la
           rsync -avz --delete \
-            -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
-            dist/pagina/browser/ \
-            $USER@$HOST:$REMOTE_PATH
+          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
+          dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           HOST: ${{ secrets.HOST }}
