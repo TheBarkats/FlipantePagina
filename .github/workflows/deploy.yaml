@@ -35,7 +35,7 @@ jobs:
           printf '%s' "$SSH_PRIVATE_KEY" | sed 's/\\n/\n/g' | tr -d '\r' > private_key
           chmod 600 private_key
           if ! ssh-keygen -y -f private_key > /dev/null; then
-            echo "Invalid SSH_PRIVATE_KEY secret format." >&2
+            echo "Invalid SSH_PRIVATE_KEY format. Use a valid PEM key with real newlines or \\n escapes." >&2
             exit 1
           fi
 
