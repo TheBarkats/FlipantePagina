@@ -1,4 +1,4 @@
-name: Deploy to SiteGround - FlipantePagina
+name: Deploy Angular to SiteGround
 
 on:
   push:
@@ -32,18 +32,9 @@ jobs:
           PORT: ${{ secrets.PORT }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
-          key_dir="$(mktemp -d)"
-          trap 'rm -rf "$key_dir"' EXIT
-          private_key="$key_dir/private_key"
-
-          printf '%s' "$SSH_PRIVATE_KEY" | sed 's/\\n/\n/g' | tr -d '\r' > "$private_key"
-          chmod 600 "$private_key"
-
-          if ! key_error="$(ssh-keygen -y -f "$private_key" 2>&1 >/dev/null)"; then
-            echo "SSH key validation failed: ${key_error}. Use a valid PEM key with real newlines or backslash-n escapes." >&2
-            exit 1
-          fi
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
 
           rsync -avz --delete --dry-run \
-          -e "ssh -i \"$private_key\" -o StrictHostKeyChecking=no -p $PORT" \
+          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
           dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
