@@ -25,16 +25,17 @@ jobs:
         run: npm run build
 
       - name: Deploy to SiteGround
+        
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          ls -la
+          rsync -avz --delete --dry-run \
+          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
+          dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           HOST: ${{ secrets.HOST }}
           USER: ${{ secrets.USER }}
           PORT: ${{ secrets.PORT }}
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
-        run: |
-          echo "$SSH_PRIVATE_KEY" > private_key
-          chmod 600 private_key
-
-          rsync -avz --delete --dry-run \
-          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
-          dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
