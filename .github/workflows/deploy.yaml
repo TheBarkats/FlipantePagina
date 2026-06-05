@@ -40,7 +40,7 @@ jobs:
           chmod 600 "$private_key"
 
           if ! key_error="$(ssh-keygen -y -f "$private_key" 2>&1 >/dev/null)"; then
-            echo "SSH key validation failed: ${key_error}. Use a valid PEM key with real newlines or \\n escapes." >&2
+            echo "SSH key validation failed: ${key_error}. Use a valid PEM key with real newlines or backslash-n escapes." >&2
             exit 1
           fi
 
