@@ -30,7 +30,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
           ls -la
-          rsync -avz --delete --dry-run \
+          rsync -avz --delete \
           -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT" \
           dist/pagina/browser/ $USER@$HOST:$REMOTE_PATH
         env:
